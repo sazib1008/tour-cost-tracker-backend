@@ -1,0 +1,27 @@
+version: '3.8'
+
+services:
+  tripzy-backend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: tripzy-backend
+    ports:
+      - "8080:8080"
+    environment:
+      - SPRING_DATA_MONGODB_URI=mongodb+srv://sazib1008_db_user:odzA4Hsqxf1nQeFm@cluster0.ehzfvex.mongodb.net/tripzy_db?retryWrites=true&w=majority&appName=Cluster0
+      - APP_JWT_SECRET=tripzy-default-super-secret-key-that-must-be-at-least-256-bits-long-for-hmac-sha256
+    restart: unless-stopped
+
+  # Optional local MongoDB fallback (uncomment if using local offline db)
+  # mongodb:
+  #   image: mongo:7.0
+  #   container_name: tripzy-mongodb
+  #   ports:
+  #     - "27017:27017"
+  #   volumes:
+  #     - mongo_data:/data/db
+  #   restart: unless-stopped
+
+# volumes:
+#   mongo_data:
