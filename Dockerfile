@@ -23,5 +23,5 @@ COPY --from=builder /app/build/libs/*.jar app.jar
 
 EXPOSE 8080
 
-ENV JAVA_OPTS="-Xms256m -Xmx512m"
+ENV JAVA_OPTS="-Xms128m -Xmx384m -XX:+UseSerialGC -XX:MaxRAMPercentage=75.0"
 ENTRYPOINT ["sh", "-c", "java $JAVA_OPTS -jar app.jar"]

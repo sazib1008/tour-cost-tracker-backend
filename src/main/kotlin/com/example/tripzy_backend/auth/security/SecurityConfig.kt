@@ -39,6 +39,8 @@ class SecurityConfig(
             .authorizeHttpRequests { authorize ->
                 authorize
                     .requestMatchers(
+                        "/",
+                        "/health",
                         "/auth/**",
                         "/error",
                         "/actuator/health",
