@@ -11,7 +11,7 @@ data class UserBalance(
     val personalSpend: Long = 0L,
     val sharedPaid: Long = 0L,
     val sharedResponsible: Long = 0L,
-    val netBalance: Long = 0L // sharedPaid - sharedResponsible (positive = receives money, negative = owes money)
+    val netBalance: Long = 0L // totalPaid - (sharedResponsible + personalSpend) (positive = receives money, negative = owes money)
 ) {
     fun isSettled(): Boolean = netBalance == 0L
     fun owes(): Boolean = netBalance < 0L

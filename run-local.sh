@@ -9,6 +9,14 @@ echo "=========================================="
 echo "🚀 Starting Tripzy Backend Locally..."
 echo "=========================================="
 
+# Load environment variables from .env if present
+if [ -f .env ]; then
+  echo "🔑 Loading environment variables from .env..."
+  set -a
+  source .env
+  set +a
+fi
+
 # Check if port 8080 is already in use
 PORT_PID=$(lsof -ti :8080 || true)
 if [ -n "$PORT_PID" ]; then
