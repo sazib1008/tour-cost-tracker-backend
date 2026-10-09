@@ -103,6 +103,6 @@ class GlobalExceptionHandlerTest {
         mockMvc.perform(get("/test/unhandled").contentType(MediaType.APPLICATION_JSON))
             .andExpect(status().isInternalServerError)
             .andExpect(jsonPath("$.status").value(500))
-            .andExpect(jsonPath("$.message").value("An unexpected error occurred. Please try again later."))
+            .andExpect(jsonPath("$.message").value("Unexpected database crash"))
     }
 }

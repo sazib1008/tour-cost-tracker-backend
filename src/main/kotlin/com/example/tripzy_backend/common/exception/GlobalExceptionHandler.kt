@@ -103,11 +103,14 @@ class GlobalExceptionHandler {
         request: HttpServletRequest
     ): ResponseEntity<ErrorResponse> {
         log.error("Unhandled internal server error occurred", ex)
+        val errorMessage = ex.localizedMessage?.takeIf { it.isNotBlank() }
+            ?: ex.message?.takeIf { it.isNotBlank() }
+            ?: "An unexpected error occurred: ${ex.javaClass.simpleName}"
         val errorResponse = ErrorResponse(
             timestamp = Instant.now(),
             status = HttpStatus.INTERNAL_SERVER_ERROR.value(),
             error = HttpStatus.INTERNAL_SERVER_ERROR.reasonPhrase,
-            message = "An unexpected error occurred. Please try again later.",
+            message = errorMessage,
             path = request.requestURI
         )
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(errorResponse)
